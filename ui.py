@@ -40,8 +40,6 @@ class QuizInterface:
             self.canvas.config(bg="green")
         else:
             self.canvas.config(bg="red")
-        self.window.after(80, lambda: self.canvas.config(bg="white"))
+        self.window.after(90, lambda: self.canvas.config(bg="white"))
 
-    def end_game(self):
-        pass
         
