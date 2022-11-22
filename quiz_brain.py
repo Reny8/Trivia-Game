@@ -13,21 +13,16 @@ class QuizBrain:
         return self.question_number < len(self.question_list)
 
     def next_question(self):
-        self.current_question = self.question_list[self.question_number]
-        self.question_number += 1
-        q_text = html.unescape(self.current_question.text)
-        return f"Q.{self.question_number}: {q_text} "
-        # user_answer = input(
-        #     f"Q.{self.question_number}: {q_text} ")
-        # self.check_answer(user_answer)
+        try:
+            self.current_question = self.question_list[self.question_number]
+            self.question_number += 1
+            q_text = html.unescape(self.current_question.text)
+            return f"Q.{self.question_number}: {q_text} "
+        except IndexError:
+            return f"Final Score is: {self.score}"
 
-    def check_answer(self, user_answer):
+    def check_answer(self,choice):
         correct_answer = self.current_question.answer
-        if user_answer.lower() == correct_answer.lower():
+        if str(choice) == correct_answer:
             self.score += 1
-            print("You got it right!")
-        else:
-            print("That's wrong.")
-
-        print(f"Your current score is: {self.score}/{self.question_number}")
-        print("\n")
+        return self.score

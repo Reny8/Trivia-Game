@@ -22,12 +22,14 @@ class QuizInterface:
         # BUTTON SETTINGS
         self.false_img = PhotoImage(file="images/false.png")
         self.true_img = PhotoImage(file="images/true.png")
-        self.false_button = Button(image=self.false_img, highlightthickness=0, command=self.next_question_display)
+        self.false_button = Button(image=self.false_img, highlightthickness=0, command= lambda: self.next_question_display(False))
         self.false_button.grid(row=2, column=0)
-        self.true_button = Button(image=self.true_img, highlightthickness=0)
+        self.true_button = Button(image=self.true_img, highlightthickness=0, command=lambda: self.next_question_display(True))
         self.true_button.grid(row=2, column=1)
         self.window.mainloop()
     
-    def next_question_display(self):
+    def next_question_display(self, choice):
+        score = self.quiz_brain.check_answer(choice)
+        self.score.config(text=f"Score: {score}")
         next = self.quiz_brain.next_question()
         self.canvas.itemconfig(self.question_text, text=next)

@@ -12,5 +12,7 @@ for question in question_data:
 
 
 quiz_ui = QuizInterface(question_bank)
-while quiz_ui.quiz_brain.still_has_questions():
+questions_left = quiz_ui.quiz_brain.still_has_questions()
+while questions_left == True:
     quiz_ui.quiz_brain.next_question()
+        
