@@ -36,7 +36,7 @@ class QuizInterface:
             next = self.quiz_brain.next_question()
             self.canvas.itemconfig(self.question_text, text=next)
         else:
-            self.canvas.itemconfig(self.question_text, text="You have reached the end of the game!")
+            self.canvas.itemconfig(self.question_text, text=f"Final Score: {self.quiz_brain.score} out of 10")
             self.disable_button()
 
     def change_card_color(self, choice):
