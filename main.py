@@ -13,6 +13,6 @@ for question in question_data:
 quiz_ui = QuizInterface(question_bank)
 questions_left = quiz_ui.quiz_brain.still_has_questions()
 while questions_left == True:
-    current = quiz_ui.quiz_brain.next_question()
-    if current == f"Final Score: {quiz_ui.quiz_brain.score}":
+    quiz_ui.quiz_brain.next_question()
+    if len(questions_left) == 0:
         break

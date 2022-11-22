@@ -22,7 +22,7 @@ class QuizBrain:
             q_text = html.unescape(self.current_question.text)
             return f"Q.{self.question_number}: {q_text} "
         except IndexError:
-            return f"Final Score: {self.score}"
+            return "You have reached the end of the quiz"
 
     def check_answer(self,choice):
         correct_answer = self.current_question.answer

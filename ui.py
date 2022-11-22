@@ -29,11 +29,15 @@ class QuizInterface:
         self.window.mainloop()
     
     def next_question_display(self, choice):
-        result = self.quiz_brain.check_answer(choice)
-        self.change_card_color(result)
-        self.score.config(text=f"Score: {self.quiz_brain.score}")
-        next = self.quiz_brain.next_question()
-        self.canvas.itemconfig(self.question_text, text=next)
+        if self.quiz_brain.still_has_questions():
+            result = self.quiz_brain.check_answer(choice)
+            self.change_card_color(result)
+            self.score.config(text=f"Score: {self.quiz_brain.score}")
+            next = self.quiz_brain.next_question()
+            self.canvas.itemconfig(self.question_text, text=next)
+        else:
+            self.canvas.itemconfig(self.question_text, text="You have reached the end of the game!")
+            self.disable_button()
 
     def change_card_color(self, choice):
         if choice == True:
@@ -42,4 +46,7 @@ class QuizInterface:
             self.canvas.config(bg="red")
         self.window.after(90, lambda: self.canvas.config(bg="white"))
 
+    def disable_button(self):
+        self.false_button.config(state="disabled")
+        self.true_button.config(state="disabled")
         
