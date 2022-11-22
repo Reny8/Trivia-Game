@@ -10,7 +10,10 @@ class QuizBrain:
         self.current_question = None
 
     def still_has_questions(self):
-        return self.question_number < len(self.question_list)
+        if self.question_number < len(self.question_list):
+            return True
+        else:
+            return False
 
     def next_question(self):
         try:
@@ -19,10 +22,11 @@ class QuizBrain:
             q_text = html.unescape(self.current_question.text)
             return f"Q.{self.question_number}: {q_text} "
         except IndexError:
-            return f"Final Score is: {self.score}"
+            return f"Final Score: {self.score}"
 
     def check_answer(self,choice):
         correct_answer = self.current_question.answer
         if str(choice) == correct_answer:
             self.score += 1
-        return self.score
+            return True
+        return False

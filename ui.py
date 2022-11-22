@@ -29,7 +29,19 @@ class QuizInterface:
         self.window.mainloop()
     
     def next_question_display(self, choice):
-        score = self.quiz_brain.check_answer(choice)
-        self.score.config(text=f"Score: {score}")
+        result = self.quiz_brain.check_answer(choice)
+        self.change_card_color(result)
+        self.score.config(text=f"Score: {self.quiz_brain.score}")
         next = self.quiz_brain.next_question()
         self.canvas.itemconfig(self.question_text, text=next)
+
+    def change_card_color(self, choice):
+        if choice == True:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(80, lambda: self.canvas.config(bg="white"))
+
+    def end_game(self):
+        pass
+        

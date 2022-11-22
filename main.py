@@ -2,7 +2,6 @@ from question_model import Question
 from data import question_data
 from ui import QuizInterface
 
-
 question_bank = []
 for question in question_data:
     question_text = question["question"]
@@ -14,5 +13,6 @@ for question in question_data:
 quiz_ui = QuizInterface(question_bank)
 questions_left = quiz_ui.quiz_brain.still_has_questions()
 while questions_left == True:
-    quiz_ui.quiz_brain.next_question()
-        
+    current = quiz_ui.quiz_brain.next_question()
+    if current == f"Final Score: {quiz_ui.quiz_brain.score}":
+        break
